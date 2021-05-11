@@ -17,7 +17,7 @@ var svg = d3
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
-var chartGroup = svg.append("g")
+var groupChart = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 d3.csv("assets/data/data.csv").then(function (CensusData) {
@@ -39,10 +39,10 @@ d3.csv("assets/data/data.csv").then(function (CensusData) {
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
 
-    chartGroup.append("g").attr("transform", `translate(0, ${height})`).call(xAxis);
-    chartGroup.append("g").call(yAxis);
+    groupChart.append("g").attr("transform", `translate(0, ${height})`).call(xAxis);
+    groupChart.append("g").call(yAxis);
 
-    chartGroup.selectAll("circle")
+    groupChart.selectAll("circle")
         .data(CensusData)
         .enter()
         .append("circle")
@@ -53,7 +53,7 @@ d3.csv("assets/data/data.csv").then(function (CensusData) {
         .classed("stateCircle", true)
         .attr("opacity", 0.75);
 
-    chartGroup.append("g")
+    groupChart.append("g")
         .selectAll('text')
         .data(CensusData)
         .enter()
@@ -69,7 +69,7 @@ d3.csv("assets/data/data.csv").then(function (CensusData) {
         .style("font-weight", "bold")
         .attr("alignment-baseline", "central");
 
-    chartGroup.append("text")
+    groupChart.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 13})`)
         .attr("text-anchor", "middle")
         .attr("font-size", "16px")
@@ -77,7 +77,7 @@ d3.csv("assets/data/data.csv").then(function (CensusData) {
         .style("font-weight", "bold")
         .text("Median Age");
 
-    chartGroup.append("text")
+    groupChart.append("text")
         .attr("y", 0 - ((margin.left / 2) + 2))
         .attr("x", 0 - (height / 2))
         .attr("text-anchor", "middle")
